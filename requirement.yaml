@@ -1,0 +1,13 @@
+name: albef
+channels:
+  - defaults
+  - conda-forge
+  - pytorch
+dependencies:
+  - python=3.8
+  - pytorch=1.8.0
+  - torchvision
+  - pip
+  - pip:
+      - transformers==4.8.1
+      - timm==0.4.9
