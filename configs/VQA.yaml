@@ -1,5 +1,5 @@
 train_file: ['data/vqa_train.json',
-            # 'data/vqa_val.json',   
+            'data/vqa_val.json',   
             #  'data/vg_qa.json'
              ]
              
