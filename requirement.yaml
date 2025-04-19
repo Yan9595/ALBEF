@@ -9,6 +9,7 @@ dependencies:
   - torchvision
   - torchaudio
   - cudatoolkit
+  - matplotlib
   - pip
   - pip:
       - transformers==4.25.1 #4.8.1
@@ -16,3 +17,4 @@ dependencies:
       - Pillow
       - ruamel.yaml==0.17.*
       - opencv-python
+      - matplotlib
