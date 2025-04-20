@@ -3,11 +3,11 @@ from torch.utils.data import DataLoader
 from torchvision import transforms
 from PIL import Image
 
-from dataset.caption_dataset import re_train_dataset, re_eval_dataset, pretrain_dataset
-from dataset.nlvr_dataset import nlvr_dataset
-from dataset.ve_dataset import ve_dataset
+# from dataset.caption_dataset import re_train_dataset, re_eval_dataset, pretrain_dataset
+# from dataset.nlvr_dataset import nlvr_dataset
+# from dataset.ve_dataset import ve_dataset
 from dataset.vqa_dataset import vqa_dataset
-from dataset.grounding_dataset import grounding_dataset
+# from dataset.grounding_dataset import grounding_dataset
 
 from dataset.randaugment import RandomAugment
 
@@ -37,45 +37,45 @@ def create_dataset(dataset, config):
         normalize,
         ])   
     
-    if dataset=='pretrain':
-        dataset = pretrain_dataset(config['train_file'], pretrain_transform)                  
-        return dataset      
+    # if dataset=='pretrain':
+    #     dataset = pretrain_dataset(config['train_file'], pretrain_transform)                  
+    #     return dataset      
                
-    elif dataset=='re':          
-        train_dataset = re_train_dataset(config['train_file'], train_transform, config['image_root'])
-        val_dataset = re_eval_dataset(config['val_file'], test_transform, config['image_root'])  
-        test_dataset = re_eval_dataset(config['test_file'], test_transform, config['image_root'])                
-        return train_dataset, val_dataset, test_dataset   
+    # elif dataset=='re':          
+    #     train_dataset = re_train_dataset(config['train_file'], train_transform, config['image_root'])
+    #     val_dataset = re_eval_dataset(config['val_file'], test_transform, config['image_root'])  
+    #     test_dataset = re_eval_dataset(config['test_file'], test_transform, config['image_root'])                
+    #     return train_dataset, val_dataset, test_dataset   
 
-    elif dataset=='vqa': 
+    if dataset=='vqa': 
         train_dataset = vqa_dataset(config['train_file'], train_transform, config['vqa_root'], config['vg_root'], split='train') 
         vqa_test_dataset = vqa_dataset(config['test_file'], test_transform, config['vqa_root'], config['vg_root'], split='test', answer_list=config['answer_list'])       
         return train_dataset, vqa_test_dataset
 
-    elif dataset=='nlvr':   
-        train_dataset = nlvr_dataset(config['train_file'], train_transform, config['image_root'])  
-        val_dataset = nlvr_dataset(config['val_file'], test_transform, config['image_root'])  
-        test_dataset = nlvr_dataset(config['test_file'], test_transform, config['image_root'])                
-        return train_dataset, val_dataset, test_dataset        
+    # elif dataset=='nlvr':   
+    #     train_dataset = nlvr_dataset(config['train_file'], train_transform, config['image_root'])  
+    #     val_dataset = nlvr_dataset(config['val_file'], test_transform, config['image_root'])  
+    #     test_dataset = nlvr_dataset(config['test_file'], test_transform, config['image_root'])                
+    #     return train_dataset, val_dataset, test_dataset        
                
-    elif dataset=='ve':   
-        train_dataset = ve_dataset(config['train_file'], train_transform, config['image_root'])  
-        val_dataset = ve_dataset(config['val_file'], test_transform, config['image_root'])  
-        test_dataset = ve_dataset(config['test_file'], test_transform, config['image_root'])                
-        return train_dataset, val_dataset, test_dataset     
+    # elif dataset=='ve':   
+    #     train_dataset = ve_dataset(config['train_file'], train_transform, config['image_root'])  
+    #     val_dataset = ve_dataset(config['val_file'], test_transform, config['image_root'])  
+    #     test_dataset = ve_dataset(config['test_file'], test_transform, config['image_root'])                
+    #     return train_dataset, val_dataset, test_dataset     
     
-    elif dataset=='grounding':
-        train_transform = transforms.Compose([                        
-                transforms.Resize((config['image_res'],config['image_res']),interpolation=Image.BICUBIC),
-                transforms.RandomHorizontalFlip(),
-                RandomAugment(2,7,isPIL=True,augs=['Identity','AutoContrast','Equalize','Brightness','Sharpness',
-                                                  'ShearX', 'ShearY', 'TranslateX', 'TranslateY', 'Rotate']),     
-                transforms.ToTensor(),
-                normalize,
-            ])         
-        train_dataset = grounding_dataset(config['train_file'], train_transform, config['image_root'], mode='train')       
-        test_dataset = grounding_dataset(config['test_file'], test_transform, config['image_root'], mode='test')             
-        return train_dataset, test_dataset    
+    # elif dataset=='grounding':
+    #     train_transform = transforms.Compose([                        
+    #             transforms.Resize((config['image_res'],config['image_res']),interpolation=Image.BICUBIC),
+    #             transforms.RandomHorizontalFlip(),
+    #             RandomAugment(2,7,isPIL=True,augs=['Identity','AutoContrast','Equalize','Brightness','Sharpness',
+    #                                               'ShearX', 'ShearY', 'TranslateX', 'TranslateY', 'Rotate']),     
+    #             transforms.ToTensor(),
+    #             normalize,
+    #         ])         
+    #     train_dataset = grounding_dataset(config['train_file'], train_transform, config['image_root'], mode='train')       
+    #     test_dataset = grounding_dataset(config['test_file'], test_transform, config['image_root'], mode='test')             
+    #     return train_dataset, test_dataset    
     
 
 def vqa_collate_fn(batch):
