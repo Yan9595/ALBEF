@@ -115,8 +115,10 @@ def save_result(result, result_dir, filename, is_json=True, is_list=True):
         result_file = os.path.join(result_dir, '%s_rank%d.pth'%(filename,utils.get_rank()))
         final_result_file = os.path.join(result_dir, '%s.pth'%filename)
         torch.save(result,result_file)     
-        
-    dist.barrier()
+
+    is_distributed = utils.is_dist_avail_and_initialized()        
+    if is_distributed:
+        dist.barrier()
 
     if utils.is_main_process():   
         # combine results from all processes
@@ -141,7 +143,10 @@ def save_result(result, result_dir, filename, is_json=True, is_list=True):
             torch.save(result,final_result_file)     
         
         print('result file saved to %s'%final_result_file)
-    dist.barrier()        
+    
+    if is_distributed:
+        dist.barrier()        
+
     return final_result_file
 
 
