@@ -1,0 +1,8 @@
+{"train_lr": "0.000", "train_loss": "0.856", "epoch": 0}
+{"train_lr": "0.000", "train_loss": "0.837", "epoch": 1}
+{"train_lr": "0.000", "train_loss": "0.823", "epoch": 2}
+{"train_lr": "0.000", "train_loss": "0.813", "epoch": 3}
+{"train_lr": "0.000", "train_loss": "0.804", "epoch": 4}
+{"train_lr": "0.000", "train_loss": "0.798", "epoch": 5}
+{"train_lr": "0.000", "train_loss": "0.794", "epoch": 6}
+{"train_lr": "0.000", "train_loss": "0.792", "epoch": 7}
