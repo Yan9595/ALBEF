@@ -48,8 +48,8 @@ def create_dataset(dataset, config):
     #     return train_dataset, val_dataset, test_dataset   
 
     if dataset=='vqa': 
-        train_dataset = vqa_dataset(config['train_file'], train_transform, config['vqa_root'], config['vg_root'], split='train') 
-        vqa_test_dataset = vqa_dataset(config['test_file'], test_transform, config['vqa_root'], config['vg_root'], split='test', answer_list=config['answer_list'])       
+        train_dataset = vqa_dataset(config['train_file'], train_transform, config['vqa_root'], config['vg_root'], eos = config['eos'], split='train') 
+        vqa_test_dataset = vqa_dataset(config['test_file'], test_transform, config['vqa_root'], config['vg_root'], eos = config['eos'], split='test', answer_list=config['answer_list'])       
         return train_dataset, vqa_test_dataset
 
     # elif dataset=='nlvr':   
